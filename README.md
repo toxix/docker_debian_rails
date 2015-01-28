@@ -1,2 +1,40 @@
 # docker_debian_rails
-Docker file for Ruby on Rails based on Debian. Image including support for imagemagick and vips. Libs to connect to postgres or mysql are installed as well.
+Docker file for Ruby on Rails based on Debian. 
+ 
+Including support for imagemagick and vips.
+Postgres or mysql libs are installed as well.
+
+
+
+## Using it for your rails application
+Put this docker file in your rails root directory (or modify it to your needs):
+```
+FROM toxix/rails_vips
+# Define working directory.
+WORKDIR /app
+
+# Set environment variables.
+ENV APPSERVER webrick
+
+ADD Gemfile /app/
+ADD Gemfile.lock /app/
+
+ENV GEM_HOME /gems/
+# todo: move bundle install into an startup script. This is usefull because gems can be in a seperate docker volume and change at runtime
+RUN bundle install
+
+ADD . /app
+
+VOLUME ["/gems", "/app"]
+
+# Define default command.
+CMD bundle exec rackup -p 8080 -o 0.0.0.0 /app/config.ru -s $APPSERVER
+
+# Expose ports.
+EXPOSE 8080
+```
+
+Compile yor docker image with ```docker build [rails_root_directory]``` where '[rails_root_directory]' is the path to your rails root directory. Run your fresh image with docker and have fun.
+
+
+If you consider to use PhantomJs, check out the dev-branch.
