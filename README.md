@@ -9,12 +9,11 @@ Postgres or mysql libs are installed as well.
 ## Using it for your rails application
 Put this docker file in your rails root directory (or modify it to your needs):
 ```
+# rails_root_dir/Docker
+
 FROM toxix/rails_vips
 # Define working directory.
 WORKDIR /app
-
-# Set environment variables.
-ENV APPSERVER webrick
 
 ADD Gemfile /app/
 ADD Gemfile.lock /app/
@@ -28,7 +27,7 @@ ADD . /app
 VOLUME ["/gems", "/app"]
 
 # Define default command.
-CMD bundle exec rackup -p 8080 -o 0.0.0.0 /app/config.ru -s $APPSERVER
+CMD /start_rails.sh
 
 # Expose ports.
 EXPOSE 8080

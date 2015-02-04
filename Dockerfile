@@ -7,15 +7,12 @@ FROM debian:stable
 ENV RUBY_MAJOR 2.2
 ENV RUBY_VERSION 2.2.0
 
-# Running apt-get in noninteractive mode
-ENV DEBIAN_FRONTEND noninteractive
-
 RUN echo 'gem: --no-document --no-rdoc --no-ri' > /etc/gemrc
 
 # Install dependencys for ruby and bundler
 # git is only needed if bundled gemfile contains a git reposetory to be complete this is also installed
 RUN    apt-get update \
-    && apt-get install -qq build-essential curl libffi-dev libgdbm-dev libncurses-dev libreadline6-dev libssl-dev libyaml-dev zlib1g-dev git \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -qq build-essential curl libffi-dev libgdbm-dev libncurses-dev libreadline6-dev libssl-dev libyaml-dev zlib1g-dev git \
     && apt-get clean -qq \
     && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
@@ -38,7 +35,7 @@ RUN gem install --no-document --no-ri --no-rdoc bundler
 # vips, imagemagic and their dependencys consumes ~500MB !? :( so compiling them. 
 # Install build dependencys for imagemagic and vips
 RUN    apt-get update -qq \
-    && apt-get install -qq pkg-config libglib2.0-dev libxml2-dev libexif-dev libjpeg8-dev libtiff5-dev libpng12-dev liblcms2-dev liborc-0.4-dev libfftw3-dev \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -qq pkg-config libglib2.0-dev libxml2-dev libexif-dev libjpeg8-dev libtiff5-dev libpng12-dev liblcms2-dev liborc-0.4-dev libfftw3-dev \
     && apt-get clean -qq \
     && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
@@ -73,15 +70,15 @@ RUN    mkdir -p /tmp/vips \
 
 # install postgres and mysql libs
 RUN    apt-get -qq update \
-    && apt-get install -qq libpq-dev libmysqlclient-dev  \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -qq libpq-dev libmysqlclient-dev  \
     && apt-get clean -qq \
     && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # RUN bundle config path /ruby_gems/
 # docker run --name ruby_gems_2-1 --volume /ruby_gems scratch true
 
-# unset the apt-get environment
-ENV DEBIAN_FRONTEND [""]
+# Add startupscript for Rails include a run of bundler
+ADD start_rails.sh /
 
 CMD [ "irb" ]
 
