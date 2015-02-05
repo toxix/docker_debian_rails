@@ -92,10 +92,9 @@ CMD [ "irb" ]
 
 ENV PHANTOM_JS phantomjs-1.9.7-linux-x86_64
 
-# Install dependencys for PhantomJS
-# git is only needed if bundled gemfile contains a git reposetory to be complete this is also installed
+# Install dependencys for PhantomJS and sqlite3
 RUN    apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -qq build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev curl\
+    && DEBIAN_FRONTEND=noninteractive apt-get install -qq build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev curl sqlite3 libsqlite3-dev\
     && apt-get clean -qq \
     && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
