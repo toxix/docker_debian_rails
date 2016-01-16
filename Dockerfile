@@ -92,9 +92,9 @@ CMD [ "irb" ]
 
 ENV PHANTOM_JS phantomjs-1.9.7-linux-x86_64
 
-# Install dependencys for PhantomJS and sqlite3
+# Install dependencys for PhantomJS, sqlite3 and npm/bower
 RUN    apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -qq build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev curl sqlite3 libsqlite3-dev\
+    && DEBIAN_FRONTEND=noninteractive apt-get install -qq build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev curl sqlite3 libsqlite3-dev npm\
     && apt-get clean -qq \
     && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
@@ -104,3 +104,6 @@ RUN curl -L "https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2
     && ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/share/phantomjs \
     && ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin/phantomjs \
     && ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/bin/phantomjs
+    
+# install bower
+RUN npm install -g bower
