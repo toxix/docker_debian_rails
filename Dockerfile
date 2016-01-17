@@ -46,7 +46,7 @@ RUN    apt-get update -qq \
 #  ldconfig is needed to not have: error while loading shared libraries: libMagickCore.so.4
 #  apt-get install pkg-config libpng12-0 libtiff5 liblcms2-2 libjpeg8
 RUN    mkdir /tmp/im -p \
-    && curl -L ftp://mirror.checkdomain.de/imagemagick/ImageMagick.tar.bz2 | tar -xjC /tmp/im --strip-components=1 \
+    && curl -L http://www.imagemagick.org/download/ImageMagick.tar.gz | tar -xzC /tmp/im --strip-components=1 \
     && cd /tmp/im \
     && ./configure --disable-docs \
     && make \
@@ -60,7 +60,7 @@ RUN    mkdir /tmp/im -p \
 #  compiling from source because don't want the dependencys of x11 (alternative to apt-get install libvips-dev)
 #  apt-get install libglib2.0-0 libxml2 libexif12 libjpeg8 libtiff5 libpng12-0 liblcms2-2 liborc-0.4-0 libfftw3-3
 RUN    mkdir -p /tmp/vips \
-    && curl -L http://www.vips.ecs.soton.ac.uk/supported/current/vips-7.42.1.tar.gz | tar -xzC /tmp/vips --strip-components=1  \
+    && curl -L http://www.vips.ecs.soton.ac.uk/supported/current/vips-8.2.1.tar.gz | tar -xzC /tmp/vips --strip-components=1  \
     && cd /tmp/vips \
     && ./configure --disable-docs \
     && make \
