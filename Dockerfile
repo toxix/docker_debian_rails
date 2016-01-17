@@ -60,7 +60,7 @@ RUN    mkdir /tmp/im -p \
 #  compiling from source because don't want the dependencys of x11 (alternative to apt-get install libvips-dev)
 #  apt-get install libglib2.0-0 libxml2 libexif12 libjpeg8 libtiff5 libpng12-0 liblcms2-2 liborc-0.4-0 libfftw3-3
 RUN    mkdir -p /tmp/vips \
-    && curl -L http://www.vips.ecs.soton.ac.uk/supported/current/vips-7.42.1.tar.gz | tar -xzC /tmp/vips --strip-components=1  \
+    && curl -L http://www.vips.ecs.soton.ac.uk/supported/current/vips-8.2.1.tar.gz | tar -xzC /tmp/vips --strip-components=1  \
     && cd /tmp/vips \
     && ./configure --disable-docs \
     && make \
