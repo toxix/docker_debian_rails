@@ -35,7 +35,7 @@ RUN gem install --no-document --no-ri --no-rdoc bundler
 # vips, imagemagic and their dependencys consumes ~500MB !? :( so compiling them. 
 # Install build dependencys for imagemagic and vips
 RUN    apt-get update -qq \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -qq pkg-config libglib2.0-dev libxml2-dev libexif-dev libjpeg8-dev libtiff5-dev libpng12-dev liblcms2-dev liborc-0.4-dev libfftw3-dev \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -qq pkg-config libglib2.0-dev libxml2-dev libexif-dev libjpeg-dev libtiff5-dev libpng12-dev liblcms2-dev liborc-0.4-dev libfftw3-dev \
     && apt-get clean -qq \
     && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
