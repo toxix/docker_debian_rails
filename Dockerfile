@@ -94,7 +94,7 @@ ENV PHANTOM_JS phantomjs-1.9.7-linux-x86_64
 
 # Install dependencys for PhantomJS, sqlite3 and npm/bower
 RUN    apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -qq build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev curl sqlite3 libsqlite3-dev npm\
+    && DEBIAN_FRONTEND=noninteractive apt-get install -qq build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev curl sqlite3 libsqlite3-dev node npm\
     && apt-get clean -qq \
     && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
