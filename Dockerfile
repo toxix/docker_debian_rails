@@ -46,7 +46,7 @@ RUN    apt-get update -qq \
 #  ldconfig is needed to not have: error while loading shared libraries: libMagickCore.so.4
 #  apt-get install pkg-config libpng12-0 libtiff5 liblcms2-2 libjpeg8
 RUN    mkdir /tmp/im -p \
-    && curl -L ftp://mirror.checkdomain.de/imagemagick/ImageMagick.tar.bz2 | tar -xjC /tmp/im --strip-components=1 \
+    && curl -L http://www.imagemagick.org/download/ImageMagick.tar.gz | tar -xzC /tmp/im --strip-components=1 \
     && cd /tmp/im \
     && ./configure --disable-docs \
     && make \
