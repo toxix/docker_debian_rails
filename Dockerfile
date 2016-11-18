@@ -35,7 +35,7 @@ RUN gem install --no-document --no-ri --no-rdoc bundler
 # vips, imagemagic and their dependencys consumes ~500MB !? :( so compiling them.
 # Install build dependencys for imagemagic and vips
 RUN    apt-get update -qq \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -qq pkg-config libglib2.0-dev libxml2-dev libexif-dev libjpeg8-dev libtiff5-dev libpng12-dev liblcms2-dev liborc-0.4-dev libfftw3-dev \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -qq pkg-config libglib2.0-dev libxml2-dev libexif-dev libjpeg-dev libtiff5-dev libpng12-dev liblcms2-dev liborc-0.4-dev libfftw3-dev \
     && apt-get clean -qq \
     && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
@@ -46,7 +46,7 @@ RUN    apt-get update -qq \
 #  ldconfig is needed to not have: error while loading shared libraries: libMagickCore.so.4
 #  apt-get install pkg-config libpng12-0 libtiff5 liblcms2-2 libjpeg8
 RUN    mkdir /tmp/im -p \
-    && curl -L ftp://mirror.checkdomain.de/imagemagick/ImageMagick.tar.bz2 | tar -xjC /tmp/im --strip-components=1 \
+    && curl -L http://www.imagemagick.org/download/ImageMagick.tar.gz | tar -xzC /tmp/im --strip-components=1 \
     && cd /tmp/im \
     && ./configure --disable-docs \
     && make \
