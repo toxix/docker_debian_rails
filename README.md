@@ -1,6 +1,6 @@
 # docker_debian_rails
-Docker file for Ruby on Rails based on Debian. 
- 
+Docker file for Ruby on Rails based on Debian.
+
 Including support for imagemagick and vips.
 Postgres or mysql libs are installed as well.
 
@@ -11,7 +11,10 @@ Put this docker file in your rails root directory (or modify it to your needs):
 ```
 # rails_root_dir/Docker
 
-FROM toxix/rails_vips
+FROM toxix/debian-rails
+# For including develop tools like phantomjs use
+#FROM toxix/debian-rails:dev
+
 # Define working directory.
 WORKDIR /app
 
