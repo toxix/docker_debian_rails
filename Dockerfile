@@ -5,7 +5,7 @@
 FROM debian:stable
 
 ENV RUBY_MAJOR 2.2
-ENV RUBY_VERSION 2.2.0
+ENV RUBY_VERSION 2.2.6
 
 RUN echo 'gem: --no-document --no-rdoc --no-ri' > /etc/gemrc
 
@@ -32,7 +32,7 @@ RUN gem install --no-document --no-ri --no-rdoc bundler
 
 
 
-# vips, imagemagic and their dependencys consumes ~500MB !? :( so compiling them. 
+# vips, imagemagic and their dependencys consumes ~500MB !? :( so compiling them.
 # Install build dependencys for imagemagic and vips
 RUN    apt-get update -qq \
     && DEBIAN_FRONTEND=noninteractive apt-get install -qq pkg-config libglib2.0-dev libxml2-dev libexif-dev libjpeg-dev libtiff5-dev libpng12-dev liblcms2-dev liborc-0.4-dev libfftw3-dev \
@@ -60,7 +60,7 @@ RUN    mkdir /tmp/im -p \
 #  compiling from source because don't want the dependencys of x11 (alternative to apt-get install libvips-dev)
 #  apt-get install libglib2.0-0 libxml2 libexif12 libjpeg8 libtiff5 libpng12-0 liblcms2-2 liborc-0.4-0 libfftw3-3
 RUN    mkdir -p /tmp/vips \
-    && curl -L http://www.vips.ecs.soton.ac.uk/supported/current/vips-8.2.1.tar.gz | tar -xzC /tmp/vips --strip-components=1  \
+    && curl -L http://www.vips.ecs.soton.ac.uk/supported/current/vips-8.4.4.tar.gz | tar -xzC /tmp/vips --strip-components=1  \
     && cd /tmp/vips \
     && ./configure --disable-docs \
     && make \
