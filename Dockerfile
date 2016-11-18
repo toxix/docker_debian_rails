@@ -4,8 +4,8 @@
 
 FROM debian:stable
 
-ENV RUBY_MAJOR 2.2
-ENV RUBY_VERSION 2.2.6
+ENV RUBY_MAJOR 2.3
+ENV RUBY_VERSION 2.3.2
 
 RUN echo 'gem: --no-document --no-rdoc --no-ri' > /etc/gemrc
 
@@ -78,7 +78,7 @@ RUN    apt-get -qq update \
 # docker run --name ruby_gems_2-1 --volume /ruby_gems scratch true
 
 # Add startupscript for Rails include a run of bundler
-ADD start_rails.sh /
+COPY start_rails.sh /
 
 CMD [ "irb" ]
 
