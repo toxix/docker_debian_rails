@@ -78,7 +78,7 @@ RUN    apt-get -qq update \
 # docker run --name ruby_gems_2-1 --volume /ruby_gems scratch true
 
 # Add startupscript for Rails include a run of bundler
-ADD start_rails.sh /
+COPY start_rails.sh /
 
 CMD [ "irb" ]
 
